@@ -5,10 +5,7 @@ const nodemailer = require('nodemailer');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-app.use(cors({
-    origin: '*',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -20,42 +17,47 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-app.post('/api/mail', (req, res) => {
-    let info = req.body;
+app.post('/api/email', (req, res) => {
+    const mail = req.body;
     const mailOptions = {
-        from: info.email, // sender address
+        from: mail.email, // sender address
         to: 'shehab.nagy1998@gmail.com', // list of receivers
-        subject: info.email, // Subject line
+        subject: mail.email, // Subject line
         html: `
             <div>
                 <p>name:</p>
-                <p style="margin-left:50px;">${info.name}</p>
+                <p style="margin-left:50px;">${mail.name}</p>
             </div>
             <div>
                 <p>phone:</p>
-                <p style="margin-left:50px;">${info.phone}</p>
+                <p style="margin-left:50px;">${mail.phone}</p>
             </div>
             <div>
                 <p>email:</p>
-                <p style="margin-left:50px;">${info.email}</p>
+                <p style="margin-left:50px;">${mail.email}</p>
             </div>
             <div>
                 <p>service:</p>
-                <p style="margin-left:50px;">${info.service}</p>
+                <p style="margin-left:50px;">${mail.service}</p>
             </div>
             <div>
                 <p>message:</p>
-                <p style="margin-left:50px;">${info.message}</p>
+                <p style="margin-left:50px;">${mail.message}</p>
             </div>
         `// plain text body
     };
-    console.log(info);
-    transporter.sendMail(mailOptions, function (err, info) {
+    transporter.sendMail(mailOptions, function (err, ress) {
         if (err)
             console.log(err)
-        else
-            res.json(info);
+        else {
+            console.log(mail)
+            res.json(ress);
+        }
     });
 });
 
-app.listen(PORT)
+app.listen(PORT, (err) => {
+    if (err)
+        console.log(err)
+    console.log(`listen on port ${PORT}`)
+})
