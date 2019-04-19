@@ -3,8 +3,12 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const app = express();
+const PORT = process.env.PORT || 8000;
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -19,7 +23,7 @@ const transporter = nodemailer.createTransport({
 app.post('/api/mail', (req, res) => {
     let info = req.body;
     const mailOptions = {
-        from: 'shehab.nagy1998@gmail.com', // sender address
+        from: info.email, // sender address
         to: 'shehab.nagy1998@gmail.com', // list of receivers
         subject: info.email, // Subject line
         html: `
@@ -54,4 +58,4 @@ app.post('/api/mail', (req, res) => {
     });
 });
 
-module.exports = app;
+app.listen(PORT)
