@@ -11,11 +11,11 @@ const found = require('./routes/found');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.options('*', cors());
 app.use('/helpers', helpers);
 app.use('/user', user);
 app.use('/lost', lost);
 app.use('/found', found);
-app.options('*', cors());
 
 mongoose.connect(serverMon, { useNewUrlParser: true })
     .then(res => { console.log('database connected') })
