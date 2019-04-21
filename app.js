@@ -9,13 +9,13 @@ const user = require('./routes/user');
 const lost = require('./routes/lost');
 const found = require('./routes/found');
 
-app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/helpers', helpers);
 app.use('/user', user);
 app.use('/lost', lost);
 app.use('/found', found);
+app.options('*', cors());
 
 mongoose.connect(serverMon, { useNewUrlParser: true })
     .then(res => { console.log('database connected') })
