@@ -10,25 +10,17 @@ const car_foundSchema = new Schema({
     lic_pla_num: {
         type: Number,
         required: true,
+        unique: true
     },
     lic_pla_let: {
         type: String,
         required: true,
-        uppercase: true
+        uppercase: true,
+        unique: true
     },
     address: {
         type: String,
         required: true,
-    },
-    engine_no: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    vin_no: {
-        type: String,
-        required: true,
-        unique: true
     },
     date: {
         type: Date,
@@ -37,14 +29,19 @@ const car_foundSchema = new Schema({
     color: {
         type: String,
         required: true,
-        uppercase: true
     },
     brand: {
         type: String,
         required: true,
-        uppercase: true
     },
-
+    userEmail: {
+        type: String,
+        required: true
+    }
 });
 
-module.exports = mongoose.model('car_found', car_foundSchema)
+car_foundSchema.statics.getAll = function () {
+    return this.find({})
+}
+
+module.exports = mongoose.model('car_founds', car_foundSchema)

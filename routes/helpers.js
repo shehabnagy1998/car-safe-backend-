@@ -25,28 +25,4 @@ router.get('/brands', (req, res) => {
         })
 })
 
-router.get('/lost', (req, res) => {
-
-})
-
-router.post('/lost/add', (req, res) => {
-
-})
-
-router.delete('/lost/remove/:id', (req, res) => {
-
-})
-
-router.get('/found', (req, res) => {
-
-})
-
-router.post('/found/add', (req, res) => {
-
-})
-
-router.delete('/found/remove/:id', (req, res) => {
-
-})
-
 module.exports = router;

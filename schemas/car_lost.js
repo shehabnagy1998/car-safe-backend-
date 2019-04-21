@@ -10,11 +10,13 @@ const car_lostSchema = new Schema({
     lic_pla_num: {
         type: Number,
         required: true,
+        unique: true
     },
     lic_pla_let: {
         type: String,
         required: true,
-        uppercase: true
+        uppercase: true,
+        unique: true
     },
     address: {
         type: String,
@@ -23,12 +25,10 @@ const car_lostSchema = new Schema({
     engine_no: {
         type: String,
         required: true,
-        unique: true
     },
     vin_no: {
         type: String,
         required: true,
-        unique: true
     },
     date: {
         type: Date,
@@ -37,14 +37,23 @@ const car_lostSchema = new Schema({
     color: {
         type: String,
         required: true,
-        uppercase: true
     },
     brand: {
         type: String,
         required: true,
-        uppercase: true
     },
-
+    userEmail: {
+        type: String,
+        required: true
+    }
 })
 
-module.exports = mongoose.model('car_lost', car_lostSchema)
+car_lostSchema.statics.getAll = function () {
+    return this.find({})
+}
+
+car_lostSchema.statics.delete = function (id) {
+    return this.findByIdAndRemove(id)
+}
+
+module.exports = mongoose.model('car_losts', car_lostSchema)
