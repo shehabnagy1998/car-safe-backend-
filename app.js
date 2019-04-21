@@ -9,9 +9,22 @@ const user = require('./routes/user');
 const lost = require('./routes/lost');
 const found = require('./routes/found');
 
+//CORS middleware
+const allowCrossDomain = function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.options('*', cors());
+// app.use(cors({
+//     origin: '*',
+//     optionsSuccessStatus: 200
+// }));
+app.use(allowCrossDomain);
 app.use('/helpers', helpers);
 app.use('/user', user);
 app.use('/lost', lost);
