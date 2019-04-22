@@ -4,7 +4,7 @@ const Colors = require('../schemas/colors');
 const Brands = require('../schemas/brands');
 
 router.get('/colors', (req, res) => {
-    Colors.getAll()
+    Colors.find({})
         .then(resault => {
             res.status(200).json(resault)
         })
@@ -15,7 +15,7 @@ router.get('/colors', (req, res) => {
 })
 
 router.get('/brands', (req, res) => {
-    Brands.getAll()
+    Brands.find({})
         .then(resault => {
             res.status(200).json(resault)
         })

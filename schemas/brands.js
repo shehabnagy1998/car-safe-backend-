@@ -15,8 +15,4 @@ const brandSchema = new Schema({
     },
 })
 
-brandSchema.statics.getAll = function () {
-    return this.find({})
-}
-
 module.exports = mongoose.model('brands', brandSchema)

@@ -14,8 +14,4 @@ const colorSchema = new Schema({
     },
 })
 
-colorSchema.statics.getAll = function () {
-    return this.find({})
-}
-
 module.exports = mongoose.model('colors', colorSchema)

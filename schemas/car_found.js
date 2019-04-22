@@ -10,13 +10,12 @@ const car_foundSchema = new Schema({
     lic_pla_num: {
         type: Number,
         required: true,
-        unique: true
+
     },
     lic_pla_let: {
         type: String,
         required: true,
         uppercase: true,
-        unique: true
     },
     address: {
         type: String,
@@ -37,11 +36,11 @@ const car_foundSchema = new Schema({
     userEmail: {
         type: String,
         required: true
+    },
+    isMatch: {
+        type: Boolean,
+        required: true
     }
 });
-
-car_foundSchema.statics.getAll = function () {
-    return this.find({})
-}
 
 module.exports = mongoose.model('car_founds', car_foundSchema)

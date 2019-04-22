@@ -8,7 +8,6 @@ router.post('/signin', (req, res) => {
         .then(resault => {
             if (resault.length >= 1) {
                 res.status(200).json(resault[0])
-                console.log(resault)
             } else {
                 res.status(500).send({ message: 'wrong email or nid' })
             }
@@ -20,7 +19,6 @@ router.post('/signin', (req, res) => {
 
 router.post('/signup', (req, res) => {
     let info = req.body;
-    console.log(info)
     User.find({ email: info.email })
         .then(resault => {
             if (resault.length <= 0) {
