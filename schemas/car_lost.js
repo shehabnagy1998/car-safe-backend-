@@ -8,7 +8,7 @@ const car_lostSchema = new Schema({
         unique: true
     },
     lic_pla_num: {
-        type: Number,
+        type: String,
         required: true,
     },
     lic_pla_let: {
@@ -29,7 +29,7 @@ const car_lostSchema = new Schema({
         required: true,
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
     },
     color: {

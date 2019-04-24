@@ -8,7 +8,7 @@ const car_foundSchema = new Schema({
         unique: true
     },
     lic_pla_num: {
-        type: Number,
+        type: String,
         required: true,
 
     },
@@ -22,7 +22,7 @@ const car_foundSchema = new Schema({
         required: true,
     },
     date: {
-        type: Date,
+        type: String,
         required: true,
     },
     color: {
