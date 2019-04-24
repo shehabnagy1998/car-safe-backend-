@@ -42,8 +42,6 @@ router.post('/add', (req, res) => {
                         if (!isEmpty(lostRes)) {
                             isMatch = true
                         }
-                        console.log(lostRes);
-
 
                         // no report exist so save new one to database
                         const newFound = new carFound({
@@ -90,7 +88,7 @@ router.delete('/remove/:id', (req, res) => {
     let id = req.params.id;
     carFound.findOneAndDelete({ reportID: id })
         .then(resault1 => {
-            carFound.getAll()
+            carFound.find({})
                 .then(resault => {
                     res.status(200).json(resault)
                 })
