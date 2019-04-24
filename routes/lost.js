@@ -36,10 +36,12 @@ router.post('/add', (req, res) => {
                 carFound.findOneAndUpdate({ lic_pla_num: report.lic_pla_num, lic_pla_let: report.lic_pla_let.toUpperCase() },
                     { isMatch: true, loserPhone: report.phone })
                     .then(foundRes => {
+
                         if (!isEmpty(foundRes)) {
                             isMatch = true
                         }
-                        console.log('saving...')
+
+                        console.log(foundRes)
                         // no report exist so save new one to database
                         const newLost = new carLost({
                             reportID: uuid(),
@@ -52,7 +54,7 @@ router.post('/add', (req, res) => {
                             color: report.color,
                             brand: report.brand,
                             isMatch: isMatch,
-                            founderPhone: ''
+                            founderPhone: !isEmpty(foundRes) ? foundRes.phone : ''
                         });
                         newLost.save()
                             .then(resault => {
@@ -68,7 +70,7 @@ router.post('/add', (req, res) => {
                     })
                     .catch(err => {
                         console.log(err)
-                        res.status(400)
+                        res.status(400).send({ message: 'error occured' })
                     })
 
             } else {
@@ -77,7 +79,7 @@ router.post('/add', (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(502)
+            res.status(502).send({ message: 'error occured' })
         })
 })
 
@@ -91,12 +93,12 @@ router.delete('/remove/:id', (req, res) => {
                 })
                 .catch(err => {
                     console.log(err);
-                    res.status(500)
+                    res.status(500).send({ message: 'error occured' })
                 })
         })
         .catch(err => {
             console.log(err);
-            res.status(500)
+            res.status(500).send({ message: 'error occured' })
         })
 })
 

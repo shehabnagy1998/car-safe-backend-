@@ -42,6 +42,7 @@ router.post('/add', (req, res) => {
                         if (!isEmpty(lostRes)) {
                             isMatch = true
                         }
+                        console.log(lostRes);
 
 
                         // no report exist so save new one to database
@@ -54,7 +55,7 @@ router.post('/add', (req, res) => {
                             color: report.color,
                             brand: report.brand,
                             isMatch: isMatch,
-                            loserPhone: ''
+                            loserPhone: !isEmpty(lostRes) ? lostRes.phone : ''
                         });
                         newFound.save()
                             .then(resault => {
@@ -70,7 +71,7 @@ router.post('/add', (req, res) => {
                     })
                     .catch(err => {
                         console.log(err)
-                        res.status(400)
+                        res.status(400).send({ message: 'error occured' })
                     })
 
 
@@ -80,7 +81,7 @@ router.post('/add', (req, res) => {
         })
         .catch(err => {
             console.log(err);
-            res.status(502)
+            res.status(502).send({ message: 'error occured' })
         })
 
 })
@@ -95,11 +96,11 @@ router.delete('/remove/:id', (req, res) => {
                 })
                 .catch(err => {
                     console.log(err);
-                    res.status(500)
+                    res.status(500).send({ message: 'error occured' })
                 })
         })
         .catch(err => {
-            res.status(500)
+            res.status(500).send({ message: 'error occured' })
         })
 })
 
