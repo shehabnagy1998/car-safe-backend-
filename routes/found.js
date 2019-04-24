@@ -36,7 +36,7 @@ router.post('/add', (req, res) => {
                 // check if there is match
                 carLost.findOneAndUpdate(
                     { lic_pla_num: report.lic_pla_num, lic_pla_let: report.lic_pla_let.toUpperCase() },
-                    { isMatch: true, founderEmail: report.userEmail })
+                    { isMatch: true, founderPhone: report.phone })
                     .then(lostRes => {
 
                         if (!isEmpty(lostRes)) {
@@ -49,12 +49,12 @@ router.post('/add', (req, res) => {
                             reportID: uuid(),
                             lic_pla_num: report.lic_pla_num,
                             lic_pla_let: report.lic_pla_let,
-                            address: report.address,
+                            phone: report.phone,
                             date: report.date,
                             color: report.color,
                             brand: report.brand,
-                            userEmail: report.userEmail,
-                            isMatch: isMatch
+                            isMatch: isMatch,
+                            loserPhone: ''
                         });
                         newFound.save()
                             .then(resault => {

@@ -17,7 +17,7 @@ const car_foundSchema = new Schema({
         required: true,
         uppercase: true,
     },
-    address: {
+    phone: {
         type: String,
         required: true,
     },
@@ -33,13 +33,12 @@ const car_foundSchema = new Schema({
         type: String,
         required: true,
     },
-    userEmail: {
-        type: String,
-        required: true
-    },
     isMatch: {
         type: Boolean,
         required: true
+    },
+    loserPhone: {
+        type: String
     }
 });
 
